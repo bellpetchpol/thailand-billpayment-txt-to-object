@@ -1,0 +1,12 @@
+{
+    "name": "thailand-billpayment-txt-to-object",
+    "version": "1.0.0",
+    "author": "Tochsaporn Petchpol <bell_2530@hotmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "compile": "rm -rf dist/lib && tsc && tsc --build tsconfig.es5.json"
+    },
+    "dependencies": {
+        "typescript": "^5.2.2"
+    }
+}
