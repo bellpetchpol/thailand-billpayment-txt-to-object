@@ -4,9 +4,11 @@
     "author": "Tochsaporn Petchpol <bell_2530@hotmail.com>",
     "license": "MIT",
     "scripts": {
-        "compile": "rm -rf dist/lib && tsc && tsc --build tsconfig.es5.json"
+        "compile": "rm -rf dist/lib && tsc && tsc --build tsconfig.es5.json",
+        "parcel": "parcel index.html"
     },
     "dependencies": {
+        "parcel": "^2.9.3",
         "typescript": "^5.2.2"
     }
 }

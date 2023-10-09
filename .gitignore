@@ -1,2 +1,4 @@
 node_modules
 dist/lib
+dist/index*
+.parcel-cache
