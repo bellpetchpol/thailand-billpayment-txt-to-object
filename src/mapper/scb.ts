@@ -1,6 +1,7 @@
+import { stringToIsoDateString } from "./../utils/date";
 interface Detail {
   recordType: string;
-  sequence: string;
+  sequence: string | number;
   scbCode: string;
   companyACNo: string;
   paymentDate: string;
@@ -14,7 +15,7 @@ interface Detail {
   kindOfTrans: string;
   transactionCode: string;
   chequeNo: string;
-  amount: string;
+  amount: string | number;
   chqBankCode: string;
   procStatus: string;
   transDate: string;
@@ -25,19 +26,19 @@ interface Detail {
 
 interface Footer {
   recordType: string;
-  sequence: string;
+  sequence: string | number;
   scbCode: string;
   companyACNo: string;
-  totDrAmount: string;
-  totDrTrans: string;
-  totCrAmount: string;
-  totCrTrans: string;
+  totDrAmount: string | number;
+  totDrTrans: string | number;
+  totCrAmount: string | number;
+  totCrTrans: string | number;
   filler: string;
 }
 
 interface Header {
   recordType: string;
-  sequence: string;
+  sequence: string | number;
   scbCode: string;
   companyACNo: string;
   companyName: string;
@@ -47,9 +48,6 @@ interface Header {
   details: Array<Detail>;
   footer: Footer;
 }
-
-const testData =
-  "H0000010141772617529นิติบุคคลอาคารชุด ยูนิโอ เสรีไทย        27092023        All                                                                                                                                                                                 D000002014177261752927092023145512นาง เยาวลักษณ์ ล่องท                              5700625             6608000083                              00000000CNET00000000000000050000000                 099400241590400                                0040000000000D000003014177261752927092023080919นาย อัศนัย ภูครองนาค                              5700479             6604000597                              00000000CNET00000000000000100000000                 099400241590400                                0040000000000T000004014177261752900000000000000000000000000150000000002All                                                                                                                                                                                                   ";
 
 const readFromString = (text: string, autoConvert: boolean = false): Header => {
   const textLength = text.length;
@@ -87,9 +85,11 @@ const readFromString = (text: string, autoConvert: boolean = false): Header => {
       companyACNo: detailText.substring(10 + increment, 20 + increment),
       paymentDate: detailText.substring(20 + increment, 28 + increment),
       paymentTime: detailText.substring(28 + increment, 34 + increment),
-      customerName: detailText.substring(34 + increment, 84 + increment),
-      custId: detailText.substring(84 + increment, 104 + increment),
-      refNo2: detailText.substring(104 + increment, 124 + increment),
+      customerName: detailText
+        .substring(34 + increment, 84 + increment)
+        .trimEnd(),
+      custId: detailText.substring(84 + increment, 104 + increment).trimEnd(),
+      refNo2: detailText.substring(104 + increment, 124 + increment).trimEnd(),
       tranNo: detailText.substring(124 + increment, 144 + increment),
       branchNo: detailText.substring(144 + increment, 148 + increment),
       tellerNo: detailText.substring(148 + increment, 152 + increment),
@@ -134,11 +134,31 @@ const readFromString = (text: string, autoConvert: boolean = false): Header => {
   };
   if (autoConvert === true) {
     header.details.forEach((c) => {
-
+      const amount = c.amount as string;
+      c.amount = parseFloat(
+        amount.substring(0, 11) + "." + amount.substring(11)
+      );
+      c.sequence = parseFloat(c.sequence as string);
+      c.paymentDate = stringToIsoDateString(c.paymentDate);
     });
+    header.effectiveDate = stringToIsoDateString(header.effectiveDate);
+    header.sequence = parseFloat(header.sequence as string);
+
+    header.footer.sequence = parseFloat(header.footer.sequence as string);
+    const totCrAmount = header.footer.totCrAmount as string;
+    header.footer.totCrAmount = parseFloat(
+      totCrAmount.substring(0, 11) + "." + totCrAmount.substring(11)
+    );
+    header.footer.totCrTrans = parseFloat(header.footer.totCrTrans as string);
+    const totDrAmount = header.footer.totDrAmount as string;
+    header.footer.totDrAmount = parseFloat(
+      totDrAmount.substring(0, 11) + "." + totDrAmount.substring(11)
+    );
+    header.footer.totDrTrans = parseFloat(header.footer.totDrTrans as string);
   }
   return header;
 };
 
-const result = readFromString(testData);
-console.log(result);
+export default {
+  readFromString,
+};
