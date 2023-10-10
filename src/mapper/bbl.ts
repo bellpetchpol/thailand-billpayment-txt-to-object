@@ -108,14 +108,26 @@ const readFromString = (text: string, autoConvert: boolean = false): void => {
       ),
       collectorName: detailText.substring(281 + increment, 331 + increment),
       chequeStatus: detailText.substring(331 + increment, 332 + increment),
-      bankUseArea3: detailText.substring(332 + increment, 333 + increment),
-      bcCommission: detailText.substring(333 + increment, 342 + increment),
-      bankUseArea4: detailText.substring(342 + increment, 351 + increment),
-      reserve2: detailText.substring(351 + increment, 360 + increment),
+      bankUseArea3: detailText.substring(332 + increment, 341 + increment),
+      bcCommission: detailText.substring(341 + increment, 350 + increment),
+      bankUseArea4: detailText.substring(350 + increment, 359 + increment),
+      reserve2: detailText.substring(359 + increment, 450 + increment),
     };
     console.log(detail);
     details.push(detail);
   }
+
+  let footer: Footer = {
+    recordType: footerText.substring(0, 1),
+    sequence: footerText.substring(1, 7),
+    bankCode: footerText.substring(7, 10),
+    companyAccountNo: footerText.substring(10, 20),
+    totalDebitAmount: footerText.substring(20, 33),
+    totalDebitTransaction: footerText.substring(33, 39),
+    totalCreditAmount: footerText.substring(39, 52),
+    totalCreditTransaction: footerText.substring(52, 58),
+    reserve: footerText.substring(58, 256),
+  };
 };
 
 export default {
