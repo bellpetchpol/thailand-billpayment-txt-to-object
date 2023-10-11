@@ -40,7 +40,7 @@ interface Header extends BaseHeader {
   footer: Footer;
 }
 
-const readFromString = (text: string, autoConvert: boolean = false): void => {
+const readFromString = (text: string, autoConvert: boolean = false): Header => {
   const sectionLength = 450;
   const section = textToSection(text, sectionLength);
   const headerText = section.header;
@@ -126,8 +126,27 @@ const readFromString = (text: string, autoConvert: boolean = false): void => {
     totalDebitTransaction: footerText.substring(33, 39),
     totalCreditAmount: footerText.substring(39, 52),
     totalCreditTransaction: footerText.substring(52, 58),
-    reserve: footerText.substring(58, 256),
+    totalMerchantDiscount: footerText.substring(58, 71),
+    totalVat: footerText.substring(71, 81),
+    totalBcCommission: footerText.substring(81, 91),
+    totalChequeReturnFee: footerText.substring(91,101),
+    totalServiceFee: footerText.substring(101, 111),
+    reserve: footerText.substring(111,450)
   };
+
+  let header: Header = {
+    recordType: headerText.substring(0, 1),
+    sequence: headerText.substring(1, 7),
+    bankCode: headerText.substring(7, 10),
+    companyAccountNo: headerText.substring(10, 20),
+    companyName: headerText.substring(20, 60),
+    effectiveDate: headerText.substring(60, 68),
+    serviceCode: headerText.substring(68, 80),
+    reserve: headerText.substring(80, 450),
+    details: details,
+    footer: footer,
+  };
+  return header
 };
 
 export default {

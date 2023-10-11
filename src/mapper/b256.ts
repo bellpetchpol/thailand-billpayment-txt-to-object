@@ -1,4 +1,4 @@
-import { stringToIsoDateString } from "./../utils/date";
+import { stringToIsoDateString } from "../utils/date";
 import { textToSection } from "./validation";
 import { BaseHeader, BaseDetail, BaseFooter } from "../interface/base";
 interface Detail extends BaseDetail {
