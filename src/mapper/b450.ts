@@ -1,4 +1,4 @@
-import { stringToIsoDateString } from "./../utils/date";
+import { stringToIsoDateString } from "../utils/date";
 import { textToSection } from "./validation";
 
 import { BaseHeader, BaseDetail, BaseFooter } from "../interface/base";
@@ -40,7 +40,7 @@ interface Header extends BaseHeader {
   footer: Footer;
 }
 
-const readFromString = (text: string, autoConvert: boolean = false): Header => {
+export const b450 = (text: string, autoConvert: boolean = false): Header => {
   const sectionLength = 450;
   const section = textToSection(text, sectionLength);
   const headerText = section.header;
@@ -147,8 +147,4 @@ const readFromString = (text: string, autoConvert: boolean = false): Header => {
     footer: footer,
   };
   return header
-};
-
-export default {
-  readFromString,
 };

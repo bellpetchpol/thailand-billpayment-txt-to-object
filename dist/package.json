@@ -1,0 +1,31 @@
+{
+    "name": "@bellpetchpol/thailand-billpayment-txt-to-object",
+    "version": "0.0.6",
+    "description": "a set of function to read billpayment textfile",
+    "main": "lib/es5/index.js",
+    "module": "lib/es6/index.js",
+    "sideEffects": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bellpetchpol/thailand-billpayment-txt-to-object.git"
+    },
+    "files": [
+        "lib",
+        "CHANGELOG.md",
+        "LICENSE",
+        "package.json",
+        "README.md"
+    ],
+    "keywords": [
+        "billpayment",
+        "crossbank",
+        "thailand",
+        "thai"
+    ],
+    "author": "Tochsaporn Petchpol <bell_2530@hotmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/bellpetchpol/thailand-billpayment-txt-to-object/issues"
+    },
+    "homepage": "https://github.com/bellpetchpol/thailand-billpayment-txt-to-object#readme"
+}
