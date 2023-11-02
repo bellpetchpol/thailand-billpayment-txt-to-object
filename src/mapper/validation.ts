@@ -8,6 +8,11 @@ const textToSection = (text: string, sectionLength: number): Section => {
       `the string length should be more than or equal ${minimumLength}`
     );
   }
+  if (textLength % sectionLength != 0) {
+    throw new Error(
+      `The text length (${textLength}) should not have any reminder when mod by ${sectionLength}`
+    );
+  }
   const headerText = text.substring(0, sectionLength);
   const footerStartFrom = textLength - sectionLength;
   const footerText = text.substring(footerStartFrom);
