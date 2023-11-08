@@ -9,6 +9,12 @@ document.getElementById("inputfile").addEventListener("change", function () {
     {
         retried = true
         fr.readAsText(fileData, 'ISO8859-11');
+        return
+    }
+
+    if (retried){
+      console.log(fr.result);
+      console.log(b256(fr.result, true, 2));
     } else { 
       console.log(fr.result);
       console.log(b256(fr.result, true));
