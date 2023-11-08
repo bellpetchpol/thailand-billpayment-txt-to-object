@@ -41,7 +41,7 @@ interface Header extends BaseHeader {
 }
 
 export const b450 = (text: string, autoConvert: boolean = false): Header => {
-  const sectionLength = 450;
+  const sectionLength = 451;//include carriage return
   const section = textToSection(text, sectionLength);
   const headerText = section.header;
   const footerText = section.footer;

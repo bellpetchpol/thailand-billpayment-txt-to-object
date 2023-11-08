@@ -21,7 +21,7 @@ interface Header extends BaseHeader {
 }
 
 export const b256 = (text: string, autoConvert: boolean = false): Header => {
-  const sectionLength = 256;
+  const sectionLength = 257;//include carriage return
   const section = textToSection(text, sectionLength);
   const headerText = section.header;
   const footerText = section.footer;
