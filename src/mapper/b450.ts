@@ -40,8 +40,8 @@ interface Header extends BaseHeader {
   footer: Footer;
 }
 
-export const b450 = (text: string, autoConvert: boolean = false): Header => {
-  const sectionLength = 451;//include carriage return
+export const b450 = (text: string, autoConvert: boolean = false, carriageReturnDigit: number = 1): Header => {
+  const sectionLength = 450 + carriageReturnDigit;
   const section = textToSection(text, sectionLength);
   const headerText = section.header;
   const footerText = section.footer;
@@ -146,5 +146,33 @@ export const b450 = (text: string, autoConvert: boolean = false): Header => {
     details: details,
     footer: footer,
   };
+  if (autoConvert === true) {
+    header.details.forEach((c) => {
+      const amount = c.amount as string;
+      c.amount = parseFloat(
+        amount.substring(0, 11) + "." + amount.substring(11)
+      );
+      c.sequence = parseFloat(c.sequence as string);
+      c.paymentDate = stringToIsoDateString(c.paymentDate);
+    });
+    header.effectiveDate = stringToIsoDateString(header.effectiveDate);
+    header.sequence = parseFloat(header.sequence as string);
+
+    header.footer.sequence = parseFloat(header.footer.sequence as string);
+    const totCrAmount = header.footer.totalCreditAmount as string;
+    header.footer.totalCreditAmount = parseFloat(
+      totCrAmount.substring(0, 11) + "." + totCrAmount.substring(11)
+    );
+    header.footer.totalCreditTransaction = parseFloat(
+      header.footer.totalCreditTransaction as string
+    );
+    const totDrAmount = header.footer.totalDebitAmount as string;
+    header.footer.totalDebitAmount = parseFloat(
+      totDrAmount.substring(0, 11) + "." + totDrAmount.substring(11)
+    );
+    header.footer.totalDebitTransaction = parseFloat(
+      header.footer.totalDebitTransaction as string
+    );
+  }
   return header
 };

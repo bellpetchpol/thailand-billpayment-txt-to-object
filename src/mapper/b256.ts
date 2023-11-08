@@ -20,8 +20,8 @@ interface Header extends BaseHeader {
   footer: Footer;
 }
 
-export const b256 = (text: string, autoConvert: boolean = false): Header => {
-  const sectionLength = 257;//include carriage return
+export const b256 = (text: string, autoConvert: boolean = false, carriageReturnDigit: number = 1): Header => {
+  const sectionLength = 256 + carriageReturnDigit;
   const section = textToSection(text, sectionLength);
   const headerText = section.header;
   const footerText = section.footer;
