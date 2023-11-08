@@ -1,6 +1,6 @@
 {
     "name": "@bellpetchpol/thailand-billpayment-txt-to-object",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "a set of function to read billpayment textfile",
     "main": "lib/es5/index.js",
     "module": "lib/es6/index.js",
