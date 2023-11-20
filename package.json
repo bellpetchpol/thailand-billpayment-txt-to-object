@@ -8,7 +8,7 @@
         "parcel": "parcel index.html"
     },
     "dependencies": {
-        "@bellpetchpol/thailand-billpayment-txt-to-object": "^0.0.9",
+        "@bellpetchpol/thailand-billpayment-txt-to-object": "^1.0.0",
         "parcel": "^2.10.0",
         "typescript": "^5.2.2"
     }
